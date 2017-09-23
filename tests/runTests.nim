@@ -4,9 +4,8 @@ import os
 
 var hubip: string
 
-# Don't forget to set up a new user: curl -X POST -d '{"devicetype":"talkinglights#shinobi"}' http://10.1.1.22/api
-# const username = "oQPpeOcJ5Be8JjjGgnGvmzCPkDAYaTlMbVZXu-FC"
-const username = "HPwtf-00iptarIfhdM49V4VOH1qkexNuB4bAbz05"
+# Don't forget to set up a new user: curl -X POST -d '{"devicetype":"myappname#myusername"}' http://myipaddress/api
+const username = "xxx-somelongusername"
 suite "tlkit test all":
   test "call findHueHubs":
     var hubs: JsonNode
