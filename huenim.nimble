@@ -1,8 +1,8 @@
 # Package
 
-version       = "0.1.0"
+version       = "0.1.1"
 author        = "David J. Kordsmeier"
-description   = "The TalkingLights Kit"
+description   = "Huenim"
 license       = "MIT"
 
 srcDir = "src"
