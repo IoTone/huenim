@@ -30,18 +30,6 @@ proc fillString*(): string =
   for i in 0 .. 4:
     result.add($i)
 
-# XXX Some garbage test function
-proc doSomeHttp*(): string =
-  result = "-1"
-  let client = newAsyncHttpClient()
-  let response = waitFor client.get("http://iotone.co")
-  echo(response.version)
-  echo(response.status)
-  echo(response.status==Http200)
-  # echo(response.body)
-  echo(is3xx(response.code))
-  result = response.status
-
 proc toggleLights*(hubip: string, username: string, lightids: seq[string], state: bool): JsonNode =
   let client = newAsyncHttpClient()
   var buf = newString(256)
