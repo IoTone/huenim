@@ -30,7 +30,7 @@ proc fillString*(): string =
   for i in 0 .. 4:
     result.add($i)
 
-proc toggleLights*(hubip: string, username: string, lightids: seq[string], state: bool): JsonNode =
+proc toggleLights*(hubip: string, username: string, lightids: seq[string], state: bool, ramprate : int = HUE_DEFAULT_RAMP_RATE): JsonNode =
   let client = newAsyncHttpClient()
   var buf = newString(256)
 
@@ -42,7 +42,7 @@ proc toggleLights*(hubip: string, username: string, lightids: seq[string], state
 
     let body = %*{
       HUE_ONOFF_KEY: state,
-      HUE_RAMP_RATE_KEY: HUE_DEFAULT_RAMP_RATE
+      HUE_RAMP_RATE_KEY: ramprate
     }
     echo(body)
     # let response = waitFor client.put(buf, $body)
@@ -57,7 +57,7 @@ proc toggleLights*(hubip: string, username: string, lightids: seq[string], state
     result = parseJson(waitFor response.body)
     # echo(result)
 
-proc updateColors*(hubip: string, username: string, lightids: seq[string], colorx:float, colory:float): JsonNode =
+proc updateColors*(hubip: string, username: string, lightids: seq[string], colorx:float, colory:float, ramprate : int = HUE_DEFAULT_RAMP_RATE): JsonNode =
   let client = newAsyncHttpClient()
   var buf = newString(256)
 
@@ -69,7 +69,7 @@ proc updateColors*(hubip: string, username: string, lightids: seq[string], color
 
     let body = %*{
       HUE_XY_KEY: [colorx, colory],
-      HUE_RAMP_RATE_KEY: HUE_DEFAULT_RAMP_RATE
+      HUE_RAMP_RATE_KEY: ramprate
     }
     echo(body)
     # let response = waitFor client.put(buf, $body)
@@ -84,7 +84,7 @@ proc updateColors*(hubip: string, username: string, lightids: seq[string], color
     result = parseJson(waitFor response.body)
     # echo(result)
 
-proc updateColorTemps*(hubip: string, username: string, lightids: seq[string], colortemp:int): JsonNode =
+proc updateColorTemps*(hubip: string, username: string, lightids: seq[string], colortemp:int, ramprate : int = HUE_DEFAULT_RAMP_RATE): JsonNode =
   let client = newAsyncHttpClient()
   var buf = newString(256)
 
@@ -96,7 +96,7 @@ proc updateColorTemps*(hubip: string, username: string, lightids: seq[string], c
 
     let body = %*{
       HUE_COLOR_TEMP_KEY: colortemp,
-      HUE_RAMP_RATE_KEY: HUE_DEFAULT_RAMP_RATE
+      HUE_RAMP_RATE_KEY: ramprate
     }
     echo(body)
     # let response = waitFor client.put(buf, $body)
